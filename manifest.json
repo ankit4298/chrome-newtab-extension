@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name": "Modified New Tab",
+    "version": "0.1",
+    "description": "The personal New Tab",
+    "author": "Karan Batavia",
+    "chrome_url_overrides" : {
+      "newtab": "index.html"
+    },
+    "permissions": [
+      "storage",
+      "https://picsum.photos/"
+    ]
+  }

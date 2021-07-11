@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-size: cover;
+}
+
+.time {
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+}
+
+.time__text {
+  font-size: 9em;
+  color: white;
+}
+
+.time__date {
+  font-size: 2em;
+  color: white;
+}
+
+.greeting {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+}
+
+.greeting__text, .greeting__name {
+  color: white;
+}
+
+.greeting__name {
+  font-size: 3rem;
+}
+
+.a {
+  font-size: 100px;
+}
+
+.popup {
+  visibility: hidden;
+  position: fixed;
+  -webkit-transform: translateY(100vw);
+          transform: translateY(100vw);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-width: 300px;
+  background: white;
+  -webkit-transform: translateY(100vh);
+          transform: translateY(100vh);
+  text-align: center;
+  border-radius: 20px;
+  padding: 1.2rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transition: all .5s ease-in;
+  transition: all .5s ease-in;
+}
+
+.popup.open {
+  visibility: visible;
+  left: 50%;
+  top: 25%;
+  bottom: 25%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+
+.popup__input {
+  border: none;
+  outline: none;
+  margin-top: 2rem;
+  border-bottom: 1px solid lightgray;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  width: 90%;
+}
+
+.popup__input:focus {
+  border-bottom: 1px solid black;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.popup__button {
+  border: none;
+  padding: .7rem;
+  background: lightcyan;
+  cursor: pointer;
+  -webkit-transition: all .4s ease-in;
+  transition: all .4s ease-in;
+  margin-top: 1rem;
+  width: 75%;
+  font-size: 1rem;
+}
+
+.popup__button:hover {
+  background: cyan;
+}
+
+.popup__para {
+  font-size: .8rem;
+  margin-top: .8rem;
+}
+
+.quote {
+  position: fixed;
+  bottom: .5rem;
+  left: .5rem;
+  width: 30vw;
+}
+
+.quote__content, .quote__author {
+  color: white;
+}
+
+.quote__content {
+  font-style: italic;
+  font-size: 1.2rem;
+}
+/*# sourceMappingURL=style.css.map */
