@@ -1,14 +1,23 @@
 {
-    "manifest_version": 2,
-    "name": "Modified New Tab",
-    "version": "0.1",
-    "description": "The personal New Tab",
-    "author": "Karan Batavia",
-    "chrome_url_overrides" : {
-      "newtab": "index.html"
-    },
-    "permissions": [
-      "storage",
-      "https://picsum.photos/"
-    ]
-  }
+	"manifest_version": 2,
+	"name": "Customizable new tab",
+	"version": "0.2",
+	"description": "Customizable new tab",
+	"author": "Ankit Patel",
+	"chrome_url_overrides": {
+		"newtab": "index.html"
+	},
+	"options_ui": {
+		"page": "/options/options.html",
+		"open_in_tab": false
+	},
+	"icons": {
+		"16": "/icons/icon16.png",
+		"48": "/icons/icon64.png",
+		"128": "/icons/icon128.png"
+	},
+	"permissions": [
+		"storage",
+		"https://picsum.photos/"
+	]
+}

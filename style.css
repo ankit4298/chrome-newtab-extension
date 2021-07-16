@@ -24,16 +24,19 @@
   width: 100%;
   font-size: 14px;
   text-align: center;
+  -webkit-text-stroke: 2px black;
 }
 
 .time__text {
   font-size: 9em;
   color: white;
+  -webkit-text-stroke: 1.5px black;
 }
 
 .time__date {
   font-size: 2em;
   color: white;
+  -webkit-text-stroke: 1.5px #333;
 }
 
 .greeting {
@@ -139,4 +142,23 @@
   font-style: italic;
   font-size: 1.2rem;
 }
+
+.telemetry {
+  position: fixed;
+  bottom: .5rem;
+  right: .5rem;
+  width: 100%;
+  text-align: right;
+}
+
+.telemetry__content, .telemetry__author {
+  color: white;
+}
+
+.telemetry__content {
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+
 /*# sourceMappingURL=style.css.map */

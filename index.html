@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,34 +8,51 @@
     <title>New Tab</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-    <div class="greeting" >
-        <p class="greeting__text" ></p>
-        <h1 class="greeting__name" ></h1>
+<body style="background-color: #333;">
+
+    <div class="greeting">
+        <p class="greeting__text"></p>
+        <h1 class="greeting__name"></h1>
     </div>
 
-    <div class="container" >
-        <div class = "time" >
-            <h1 class = "time__text" ></h1>
-            <p class="time__date" ></p>
+    <div class="container">
+        <div class="time">
+            <h1 class="time__text"></h1>
+            <p class="time__date"></p>
         </div>
     </div>
 
     <div class="popup">
-            <h2 class="popup__text">Let's start with your name?</h2>
-            <input type="text" placeholder="Enter your name here..." class="popup__input">
-            <button class="popup__button" >Okay!</button>
-            <p class="popup__para">
-                Note: Your name or any other data does not go out of your browser.
-            </p>
+        <h2 class="popup__text">Let's start with your name?</h2>
+        <input type="text" placeholder="Enter your name here..." class="popup__input">
+        <button class="popup__button">Okay!</button>
+        <p class="popup__para">
+            Note: Your name or any other data does not go out of your browser.
+        </p>
     </div>
 
-    <div class="quote">
-        <p class="quote__content">Hello</p>
+    <div class="quote" id="divQuote">
+        <p class="quote__content"></p>
         <p class="quote__author"></p>
+    </div>
+
+    <div class="telemetry">
+        <div id="divtelemetry__lastVisited">
+            <p class="telemetry__content">Last Visited</p>
+            <p class="telemetry__author" id="telemetry__lastVisited"></p>
+        </div>
+
+        <br />
+
+        <div id="divtelemetry__visitedCount">
+            <p class="telemetry__content">Total times visited today:
+                <span class="telemetry__author" id="telemetry__visitedCount"></span>
+            </p>
+        </div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>

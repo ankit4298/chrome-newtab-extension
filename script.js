@@ -43,7 +43,12 @@ function setDate() {
     const timeDate = document.querySelector('.time__date');
     const fullTime = currentTimeAndDate();
 
-    timeDate.innerHTML = `${fullTime.date}/${fullTime.month}/${fullTime.year}`
+    let _date = `${fullTime.date}/${fullTime.month}/${fullTime.year}`
+    timeDate.innerHTML = _date
+
+    if(localStorage.getItem('savedDate') == null){
+        localStorage.setItem('savedDate', _date);
+    }
 
 }
 
@@ -69,6 +74,12 @@ function setName(fullTime) {
         document.querySelector('.popup').classList.remove('open');
         document.querySelector('.greeting__name').innerHTML = localStorageName;
 
+        // first time load values
+        localStorage.setItem('setting_lastVisited', true);
+        localStorage.setItem('setting_visitedCount', true);
+        localStorage.setItem('setting_quotes', true);
+        localStorage.setItem('setting_timeSize', 9);
+
         localStorage.setItem('showNamePopup', false);
     } else {
         const localStorageName = localStorage.getItem('name');
@@ -79,7 +90,6 @@ function setName(fullTime) {
 
 
 }
-
 
 
 async function getRandomQuote() {
@@ -93,6 +103,32 @@ async function getRandomQuote() {
 
 }
 
+
+function getDate(){
+    const fullTime = currentTimeAndDate();
+    const currDate = `${fullTime.date}/${fullTime.month}/${fullTime.year}`
+    return currDate;
+}
+
+function isNewDay(){
+    const _date = localStorage.getItem('savedDate');
+    const fullTime = currentTimeAndDate();
+    const currDate = `${fullTime.date}/${fullTime.month}/${fullTime.year}`
+
+    if(_date != currDate){
+        return 1
+    }
+
+    return 0;
+
+}
+
+
+function recordLastVisited(){
+    const fullTime = currentTimeAndDate();
+    const _lastVisited = `${fullTime.date}/${fullTime.month}/${fullTime.year} ${fullTime.hour}:${fullTime.minutes}:${fullTime.seconds}`
+    return _lastVisited;
+}
 
 
 
@@ -117,6 +153,24 @@ setInterval(setDate, 1000);
         localStorage.setItem('showNamePopup', false);
         document.querySelector('.popup').classList.remove('open');
 
+        const _isNewDay = isNewDay();
+        if(_isNewDay == 1){
+            localStorage.setItem('savedDate', getDate());
+        }
+
+        if(localStorage.getItem('visitedCount') == null){
+            localStorage.setItem('visitedCount', 0)
+        }
+        
+        let _visitedCount = parseInt(localStorage.getItem('visitedCount'));
+        _visitedCount !=null && _visitedCount != 'NaN' ? localStorage.setItem('visitedCount', _visitedCount+1) : localStorage.setItem('visitedCount', '0');
+        document.querySelector('#telemetry__visitedCount').innerHTML = localStorage.getItem('visitedCount');
+
+        const _lastVisited = recordLastVisited();
+        document.querySelector('#telemetry__lastVisited').innerHTML = localStorage.getItem('lastVisited');
+        // update new last visited date
+        localStorage.setItem('lastVisited', _lastVisited);
+
     }
 
     if (localStorage.getItem('showNamePopup') == "true" || localStorage.getItem("name") === "") {
@@ -126,9 +180,29 @@ setInterval(setDate, 1000);
 
 })();
 
+(function(){
+
+    if(localStorage.getItem('setting_lastVisited') != "true"){
+        document.getElementById('divtelemetry__lastVisited').style.display ='none'
+    }
+
+    if(localStorage.getItem('setting_visitedCount') != "true"){
+        document.getElementById('divtelemetry__visitedCount').style.display ='none'
+    }
+
+    if(localStorage.getItem('setting_quotes') != "true"){
+        document.getElementById('divQuote').style.display ='none'
+    }
+
+})();
+
 
 (function () {
     if (localStorage.length == 0) localStorage.setItem('showNamePopup', true);
 })();
 
 // localStorage.clear();
+
+
+
+console.table(localStorage);
