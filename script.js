@@ -194,6 +194,10 @@ setInterval(setDate, 1000);
         document.getElementById('divQuote').style.display ='none'
     }
 
+    if(localStorage.getItem('setting_timeSize') != null){
+        document.getElementById('timetext').style.fontSize = localStorage.getItem("setting_timeSize")+"em";
+    }
+
 })();
 
 
