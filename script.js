@@ -156,6 +156,7 @@ setInterval(setDate, 1000);
         const _isNewDay = isNewDay();
         if(_isNewDay == 1){
             localStorage.setItem('savedDate', getDate());
+            localStorage.setItem('visitedCount', 0);
         }
 
         if(localStorage.getItem('visitedCount') == null){
