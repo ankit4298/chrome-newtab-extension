@@ -1,34 +1,45 @@
+// Entry or Main function
 (function(){
 
     let _lastVisited = false;
     let _visitedCount = false;
     let _quotes = false;
     let _timeSize = "9";
+    let _displayName = "Super User";
 
     _lastVisited = localStorage.getItem('setting_lastVisited')
-    if(localStorage.getItem('setting_lastVisited') == null){
+    if(_lastVisited == null){
         localStorage.setItem('setting_lastVisited', true);
     }
-    _lastVisited = localStorage.getItem('setting_lastVisited') == "true" ? true : false;
+    _lastVisited = _lastVisited == "true" ? true : false;
     
     _visitedCount = localStorage.getItem('setting_visitedCount')
-    if(localStorage.getItem('setting_visitedCount') == null){
+    if(_visitedCount == null){
         localStorage.setItem('setting_visitedCount', true);
     }
-    _visitedCount = localStorage.getItem('setting_visitedCount') == "true" ? true : false;
+    _visitedCount = _visitedCount == "true" ? true : false;
 
     _quotes = localStorage.getItem('setting_quotes')
-    if(localStorage.getItem('setting_quotes') == null){
+    if(_quotes == null){
         localStorage.setItem('setting_quotes', true);
     }
-    _quotes = localStorage.getItem('setting_quotes') == "true" ? true : false;
+    _quotes = _quotes == "true" ? true : false;
     
-    if(localStorage.getItem('setting_timeSize') == null){
+    _timeSize = localStorage.getItem('setting_timeSize');
+    if(_timeSize == null){
         localStorage.setItem('setting_timeSize', "9");
     }
     _timeSize = localStorage.getItem('setting_timeSize');
+
+    _displayName = localStorage.getItem("name");
+    if(_displayName == "" && _displayName == null){
+        localStorage.setItem('name', _displayName);
+    }
+    displayName = localStorage.getItem("name");
+
+
     
-    updateUserDisplay(_lastVisited, _visitedCount, _quotes, _timeSize);
+    updateUserDisplay(_lastVisited, _visitedCount, _quotes, _timeSize, displayName);
 
 })();
 
@@ -39,11 +50,13 @@ function SaveSettings(){
         const _visitedCount = document.getElementById("chktelemetry__visitedCount").checked;
         const _quotes = document.getElementById("chkquotes").checked;
         const _timeSize = document.getElementById("timeSize").value;
+        const _displayName = document.getElementById("txt__name").value;
         
         localStorage.setItem('setting_lastVisited', _lastVisited ? "true" : "false");
         localStorage.setItem('setting_visitedCount', _visitedCount ? "true" : "false");
         localStorage.setItem('setting_quotes', _quotes ? "true" : "false");
         localStorage.setItem('setting_timeSize', _timeSize);
+        localStorage.setItem('name', _displayName);
         
         document.getElementById('status').innerHTML = "Settings updated successfully !!";
         
@@ -65,7 +78,9 @@ function ResetSettings(){
         localStorage.setItem('setting_quotes', true);
         localStorage.setItem('setting_timeSize', "9");
 
-        updateUserDisplay(true, true, true, "9");
+        const _displayName = localStorage.getItem('name');
+
+        updateUserDisplay(true, true, true, "9", _displayName);
         
         document.getElementById('status').innerHTML = "Settings restored successfully !!";
         
@@ -79,12 +94,13 @@ function ResetSettings(){
         
 }
 
-function updateUserDisplay(lastVisited, visitedCount, quotes, timeSize){
+function updateUserDisplay(lastVisited, visitedCount, quotes, timeSize, displayName){
 
     document.getElementById('chktelemetry__lastVisited').checked = lastVisited;
     document.getElementById('chktelemetry__visitedCount').checked =  visitedCount;
     document.getElementById('chkquotes').checked =  quotes;
     document.getElementById('timeSize').value = timeSize;
+    document.getElementById('txt__name').value = displayName;
 
 }
     
