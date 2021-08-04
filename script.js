@@ -21,7 +21,8 @@ function currentTimeAndDate() {
 function setBackgroundImage() {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    const url = `https://picsum.photos/${screenWidth}/${screenHeight}?blur=5`;
+    // const url = `https://picsum.photos/${screenWidth}/${screenHeight}?blur=5`;
+    const url = `https://picsum.photos/${screenWidth}/${screenHeight}`; // removed blur
     const image = fetch(url);
     image.then(e=>{
         document.querySelector('.container').style = "background-size: cover;background: url(" + e.url + ") center top";
@@ -61,7 +62,7 @@ function setTime() {
     const timeText = document.querySelector('.time__text');
     const fullTime = currentTimeAndDate();
 
-    timeText.innerHTML = `${fullTime.hour}: ${fullTime.minutes}: ${fullTime.seconds}`;
+    timeText.innerHTML = `${fullTime.hour}: ${fullTime.minutes}`;
 }
 
 
