@@ -150,16 +150,21 @@ function onStartup(fullTime){
     // fetch 3rd party
     setBackgroundImage();
     getRandomQuote();
+
+    return localStorage.getItem('setting_bgCarousel') !=null ? localStorage.getItem('setting_bgCarousel') == "true" : true ? false : false;
 }
 
 
 var fullTime = currentTimeAndDate();
-onStartup(fullTime);
+const IsBackgroundCarouselEnabled = onStartup(fullTime);
 
 // run continuously
 setInterval(setTime, 1000);
 setInterval(setDate, 1000);
 
+if(IsBackgroundCarouselEnabled){
+    setInterval(setBackgroundImage, 60 * 1000); // carousel image every 1 min
+}
 
 
 

@@ -6,6 +6,7 @@
     let _quotes = false;
     let _timeSize = "9";
     let _displayName = "Super User";
+    let _bgCarousel = false;
 
     _lastVisited = localStorage.getItem('setting_lastVisited')
     if(_lastVisited == null){
@@ -37,9 +38,13 @@
     }
     displayName = localStorage.getItem("name");
 
-
+    _bgCarousel = localStorage.getItem('setting_bgCarousel')
+    if(_bgCarousel == null){
+        localStorage.setItem('setting_bgCarousel', _bgCarousel); // default false
+    }
+    _bgCarousel = _bgCarousel == "true" ? true : false;
     
-    updateUserDisplay(_lastVisited, _visitedCount, _quotes, _timeSize, displayName);
+    updateUserDisplay(_lastVisited, _visitedCount, _quotes, _timeSize, displayName, _bgCarousel);
 
 })();
 
@@ -51,12 +56,14 @@ function SaveSettings(){
         const _quotes = document.getElementById("chkquotes").checked;
         const _timeSize = document.getElementById("timeSize").value;
         const _displayName = document.getElementById("txt__name").value;
+        const _bgCarousel = document.getElementById("bg_carousel").checked;
         
         localStorage.setItem('setting_lastVisited', _lastVisited ? "true" : "false");
         localStorage.setItem('setting_visitedCount', _visitedCount ? "true" : "false");
         localStorage.setItem('setting_quotes', _quotes ? "true" : "false");
         localStorage.setItem('setting_timeSize', _timeSize);
         localStorage.setItem('name', _displayName);
+        localStorage.setItem('setting_bgCarousel', _bgCarousel ? "true" : "false");
         
         document.getElementById('status').innerHTML = "Settings updated successfully !!";
         
@@ -77,10 +84,11 @@ function ResetSettings(){
         localStorage.setItem('setting_visitedCount', true);
         localStorage.setItem('setting_quotes', true);
         localStorage.setItem('setting_timeSize', "9");
+        localStorage.setItem('setting_bgCarousel', false);
 
         const _displayName = localStorage.getItem('name');
 
-        updateUserDisplay(true, true, true, "9", _displayName);
+        updateUserDisplay(true, true, true, "9", _displayName, false);
         
         document.getElementById('status').innerHTML = "Settings restored successfully !!";
         
@@ -94,13 +102,14 @@ function ResetSettings(){
         
 }
 
-function updateUserDisplay(lastVisited, visitedCount, quotes, timeSize, displayName){
+function updateUserDisplay(lastVisited, visitedCount, quotes, timeSize, displayName, bgCarousel){
 
     document.getElementById('chktelemetry__lastVisited').checked = lastVisited;
     document.getElementById('chktelemetry__visitedCount').checked =  visitedCount;
     document.getElementById('chkquotes').checked =  quotes;
     document.getElementById('timeSize').value = timeSize;
     document.getElementById('txt__name').value = displayName;
+    document.getElementById('bg_carousel').checked = bgCarousel;
 
 }
     
