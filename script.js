@@ -137,6 +137,11 @@ function recordLastVisited(){
     return _lastVisited;
 }
 
+function changeBackgroundQuote(){
+    setBackgroundImage();
+    getRandomQuote();
+}
+
 
 function onStartup(fullTime){
     // run once
@@ -227,3 +232,5 @@ if(IsBackgroundCarouselEnabled){
 (function () {
     if (localStorage.length == 0) localStorage.setItem('showNamePopup', true);
 })();
+
+document.getElementById('reset_image').addEventListener('click', changeBackgroundQuote);
