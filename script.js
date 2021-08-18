@@ -24,9 +24,9 @@ function setBackgroundImage() {
     // const url = `https://picsum.photos/${screenWidth}/${screenHeight}?blur=5`;
     const url = `https://picsum.photos/${screenWidth}/${screenHeight}`; // removed blur
     const image = fetch(url);
-    image.then(e=>{
+    image.then(e => {
         document.querySelector('.container').style = "background-size: cover;background: url(" + e.url + ") center top";
-    }).catch(ex=>{
+    }).catch(ex => {
         alert('Something went wrong fetching background image!!!');
         console.log(ex);
     })
@@ -52,7 +52,7 @@ function setDate() {
     let _date = `${fullTime.date}/${fullTime.month}/${fullTime.year}`
     timeDate.innerHTML = _date
 
-    if(localStorage.getItem('savedDate') == null){
+    if (localStorage.getItem('savedDate') == null) {
         localStorage.setItem('savedDate', _date);
     }
 
@@ -98,12 +98,12 @@ function getRandomQuote() {
 
     const response = fetch('https://api.quotable.io/random?maxLength=200&minLength=100').then(res => res.json());
 
-    response.then(e=>{
+    response.then(e => {
         const quoteContentDOM = document.querySelector('.quote__content');
         const quoteAuthorDOM = document.querySelector('.quote__author')
         quoteContentDOM.innerHTML = e.content;
         quoteAuthorDOM.innerHTML = `- ${e.author}`;
-    }).catch(ex=>{
+    }).catch(ex => {
         alert('Something went wrong fetching quote!!!');
         console.log(ex);
     })
@@ -111,18 +111,18 @@ function getRandomQuote() {
 }
 
 
-function getDate(){
+function getDate() {
     const fullTime = currentTimeAndDate();
     const currDate = `${fullTime.date}/${fullTime.month}/${fullTime.year}`
     return currDate;
 }
 
-function isNewDay(){
+function isNewDay() {
     const _date = localStorage.getItem('savedDate');
     const fullTime = currentTimeAndDate();
     const currDate = `${fullTime.date}/${fullTime.month}/${fullTime.year}`
 
-    if(_date != currDate){
+    if (_date != currDate) {
         return 1
     }
 
@@ -131,19 +131,38 @@ function isNewDay(){
 }
 
 
-function recordLastVisited(){
+function recordLastVisited() {
     const fullTime = currentTimeAndDate();
     const _lastVisited = `${fullTime.date}/${fullTime.month}/${fullTime.year} ${fullTime.hour}:${fullTime.minutes}:${fullTime.seconds}`
     return _lastVisited;
 }
 
-function changeBackgroundQuote(){
+function changeBackgroundQuote() {
     setBackgroundImage();
     getRandomQuote();
+    opacityTweaker(true);
+}
+
+function opacityTweaker(val=false) {
+
+    if(val){
+        let el = document.getElementsByClassName('telemetry');
+        el[0].style.opacity = '100%';
+
+        document.getElementById('divQuote').style.opacity = '100%';
+    }
+
+    setTimeout(() => {
+        let el = document.getElementsByClassName('telemetry');
+        el[0].style.opacity = '10%';
+
+        document.getElementById('divQuote').style.opacity = '10%';
+        return;
+    }, 5000)
 }
 
 
-function onStartup(fullTime){
+function onStartup(fullTime) {
     // run once
     setName();
     setGreeting(fullTime);
@@ -156,7 +175,10 @@ function onStartup(fullTime){
     setBackgroundImage();
     getRandomQuote();
 
-    return localStorage.getItem('setting_bgCarousel') !=null ? localStorage.getItem('setting_bgCarousel') == "true" : true ? false : false;
+    // decrease the opacity after 5sec
+    opacityTweaker();
+
+    return localStorage.getItem('setting_bgCarousel') != null ? localStorage.getItem('setting_bgCarousel') == "true" : true ? false : false;
 }
 
 
@@ -167,7 +189,7 @@ const IsBackgroundCarouselEnabled = onStartup(fullTime);
 setInterval(setTime, 1000);
 setInterval(setDate, 1000);
 
-if(IsBackgroundCarouselEnabled){
+if (IsBackgroundCarouselEnabled) {
     setInterval(setBackgroundImage, 60 * 1000); // carousel image every 1 min
 }
 
@@ -181,17 +203,17 @@ if(IsBackgroundCarouselEnabled){
         document.querySelector('.popup').classList.remove('open');
 
         const _isNewDay = isNewDay();
-        if(_isNewDay == 1){
+        if (_isNewDay == 1) {
             localStorage.setItem('savedDate', getDate());
             localStorage.setItem('visitedCount', 0);
         }
 
-        if(localStorage.getItem('visitedCount') == null){
+        if (localStorage.getItem('visitedCount') == null) {
             localStorage.setItem('visitedCount', 0)
         }
-        
+
         let _visitedCount = parseInt(localStorage.getItem('visitedCount'));
-        _visitedCount !=null && _visitedCount != 'NaN' ? localStorage.setItem('visitedCount', _visitedCount+1) : localStorage.setItem('visitedCount', '0');
+        _visitedCount != null && _visitedCount != 'NaN' ? localStorage.setItem('visitedCount', _visitedCount + 1) : localStorage.setItem('visitedCount', '0');
         document.querySelector('#telemetry__visitedCount').innerHTML = localStorage.getItem('visitedCount');
 
         const _lastVisited = recordLastVisited();
@@ -208,22 +230,22 @@ if(IsBackgroundCarouselEnabled){
 
 })();
 
-(function(){
+(function () {
 
-    if(localStorage.getItem('setting_lastVisited') != "true"){
-        document.getElementById('divtelemetry__lastVisited').style.display ='none'
+    if (localStorage.getItem('setting_lastVisited') != "true") {
+        document.getElementById('divtelemetry__lastVisited').style.display = 'none'
     }
 
-    if(localStorage.getItem('setting_visitedCount') != "true"){
-        document.getElementById('divtelemetry__visitedCount').style.display ='none'
+    if (localStorage.getItem('setting_visitedCount') != "true") {
+        document.getElementById('divtelemetry__visitedCount').style.display = 'none'
     }
 
-    if(localStorage.getItem('setting_quotes') != "true"){
-        document.getElementById('divQuote').style.display ='none'
+    if (localStorage.getItem('setting_quotes') != "true") {
+        document.getElementById('divQuote').style.display = 'none'
     }
 
-    if(localStorage.getItem('setting_timeSize') != null){
-        document.getElementById('timetext').style.fontSize = localStorage.getItem("setting_timeSize")+"em";
+    if (localStorage.getItem('setting_timeSize') != null) {
+        document.getElementById('timetext').style.fontSize = localStorage.getItem("setting_timeSize") + "em";
     }
 
 })();
